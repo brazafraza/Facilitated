@@ -9,7 +9,7 @@ public class PlayerCam : MonoBehaviour
     public float sensX;
     public float sensY;
 
-   
+
     //player orientation
     public Transform orientation;
 
@@ -24,6 +24,8 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         //turning cursor invisble on play
         Cursor.visible = false;
+
+        Invoke("Update", 20);
     }
 
     private void Update()
@@ -44,12 +46,9 @@ public class PlayerCam : MonoBehaviour
         //applying the rotate to cam and player
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
-
-
-      
-        
     }
+
+    
 
 
 }
