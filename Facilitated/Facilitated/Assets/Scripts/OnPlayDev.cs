@@ -6,18 +6,31 @@ public class OnPlayDev : MonoBehaviour
 {
     public GameObject playerMov;
     public GameObject mouseMov;
+   
+    public GameObject mouseMovCC;
+    public GameObject marsCS;
     //public GameObject mouseMovAgain;
     void Start()
     {
         Cursor.visible = false;
         mouseMov.GetComponent<PlayerCam>().enabled = false;
         playerMov.GetComponent<PlayerMovement>().enabled = false;
-        Invoke("MouseMov", 10);
+        mouseMovCC.GetComponent<PlayerCam>().enabled = false;
+       // playerMovCC.GetComponent<PlayerMovement>().enabled = false;
+        Invoke("MouseMov", 20);
+        Invoke("PlayerControlsEnable", 50);
     }
 
     void MouseMov()
     {
         mouseMov.GetComponent<PlayerCam>().enabled = true;
+       
+        // playerMov.GetComponent<PlayerMovement>().enabled = true;
+        Object.Destroy(marsCS);
+    }
+
+    void PlayerControlsEnable()
+    {
         playerMov.GetComponent<PlayerMovement>().enabled = true;
     }
     void Update()

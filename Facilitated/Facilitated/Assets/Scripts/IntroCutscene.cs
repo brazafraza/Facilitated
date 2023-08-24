@@ -9,7 +9,7 @@ public class IntroCutscene : MonoBehaviour
 
     void Start()
     {
-        Invoke("CanvasCancel", 5);
+        Invoke("CanvasCancel", 10);
         
 
     }
