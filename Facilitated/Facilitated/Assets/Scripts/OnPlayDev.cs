@@ -15,12 +15,14 @@ public class OnPlayDev : MonoBehaviour
 
     public bool canControl;
     public bool outOfBed;
+    public bool pressEOnce;
 
     public GameObject canMove;
     public GameObject startText;
 
     public GameObject marsUp;
 
+    public GameObject marsIsUp;
 
     //mars getting up
     public Animator marsAnimator;
@@ -36,6 +38,8 @@ public class OnPlayDev : MonoBehaviour
         outOfBed = false;
         startText.SetActive(false);
         marsUp.SetActive(false);
+
+        pressEOnce = true;
 
         mouseMov.GetComponent<PlayerCam>().enabled = false;
         playerMov.GetComponent<PlayerMovement>().enabled = false;
@@ -72,18 +76,21 @@ public class OnPlayDev : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.E) && canControl)
+        if (Input.GetKey(KeyCode.E) && canControl && pressEOnce)
         {
             //letting player move and destroying the press e text
             playerMov.GetComponent<PlayerMovement>().enabled = true;
             Object.Destroy(startText);
             
             outOfBed = true;
+            marsIsUp.transform.position = new Vector3(-9f, 0.5f, -11.2f);
             mars.SetActive(false);
             marsAnimator.SetTrigger("TrMarsUp");
+            //canControl = false;
 
             //move mars transfomr out of bed to pos of end cutscene mars
             //
+            Invoke("PressEOnceF", 4);
         }
 
         if (outOfBed)
@@ -93,11 +100,18 @@ public class OnPlayDev : MonoBehaviour
             Invoke("DestroyMarsUp", 4);
             //camActive.GetComponent<Camera>().enabled = true;
             outOfBed = false;
+            //canControl = false;
+            
         }
     }
     void DestroyMarsUp()
     {
         Object.Destroy(marsUp);
         mars.SetActive(true);
+    }
+
+    void PressEOnceF()
+    {
+       pressEOnce = false;
     }
 }
