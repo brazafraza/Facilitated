@@ -19,6 +19,7 @@ public class OnPlayDev : MonoBehaviour
 
     public GameObject canMove;
     public GameObject startText;
+    public GameObject crossHair;
 
     public GameObject marsUp;
 
@@ -40,6 +41,7 @@ public class OnPlayDev : MonoBehaviour
         marsUp.SetActive(false);
 
         pressEOnce = true;
+        crossHair.SetActive(false);
 
         mouseMov.GetComponent<PlayerCam>().enabled = false;
         playerMov.GetComponent<PlayerMovement>().enabled = false;
@@ -81,7 +83,8 @@ public class OnPlayDev : MonoBehaviour
             //letting player move and destroying the press e text
             playerMov.GetComponent<PlayerMovement>().enabled = true;
             Object.Destroy(startText);
-            
+
+            crossHair.SetActive(true);
             outOfBed = true;
             marsIsUp.transform.position = new Vector3(-9f, 0.5f, -11.2f);
             mars.SetActive(false);
